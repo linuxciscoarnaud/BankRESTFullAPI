@@ -156,7 +156,7 @@ public class OutMemoryUserRepository implements UserRepository {
 	@Override
 	public List<Operation> consulterOperations(String codeCompte) {
 		// TODO Auto-generated method stub
-		Query req = entityManager.createQuery("select o from Operation o where o.compte.codeCompte =: x");
+		Query req = entityManager.createQuery("select o from Operation o where o.compte.codeCompte = :x");
 		req.setParameter("x", codeCompte);
 		return req.getResultList();
 	}

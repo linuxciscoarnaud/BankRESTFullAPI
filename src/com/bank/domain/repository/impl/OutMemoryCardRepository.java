@@ -3,10 +3,12 @@
  */
 package com.bank.domain.repository.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bank.domain.Card;
 import com.bank.domain.CardItem;
+import com.bank.domain.Operation;
 import com.bank.domain.Product;
 import com.bank.domain.repository.CardRepository;
 import com.bank.dto.CardDto;
@@ -60,9 +63,19 @@ public class OutMemoryCardRepository implements CardRepository {
 	@Override
 	public Card read(Long codeCard) {
 		// TODO Auto-generated method stub
+		List<CardItem> cardItems;
 		Card card = entityManager.find(Card.class, codeCard);
 		if (card == null) {
+			System.out.println("Card not found");
 			throw new RuntimeException("Card not found");
+		}
+		else {
+			System.out.println("Card found");
+			Query req = entityManager.createQuery("select ci from CardItem ci where ci.card.codeCard = :x");
+			req.setParameter("x", codeCard);
+			cardItems = new ArrayList<>();
+			cardItems = req.getResultList();
+			card.setCardItems(cardItems);
 		}
 		return card;
 	}

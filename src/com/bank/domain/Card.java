@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 /**
  * @author Arnaud
  *
@@ -23,13 +25,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table (name = "CARD")
-//@XmlRootElement
 public class Card {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codeCard;
 	private BigDecimal totalGeneral;
+	@JsonManagedReference
 	@OneToMany (mappedBy = "card", fetch = FetchType.EAGER)
 	private Collection<CardItem> cardItems;
 	

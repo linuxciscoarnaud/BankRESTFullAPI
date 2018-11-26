@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 /**
  * @author Arnaud
  *
@@ -28,6 +30,7 @@ public class CardItem {
 	private Long codeCardItem;
 	private int quantite;
 	private BigDecimal prixTotal;
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn (name = "CODE_CARD")
 	private Card card;
