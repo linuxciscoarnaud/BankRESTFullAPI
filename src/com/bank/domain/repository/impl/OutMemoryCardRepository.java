@@ -46,6 +46,7 @@ public class OutMemoryCardRepository implements CardRepository {
 	public void create(CardDto cardDto) {
 		// TODO Auto-generated method stub
 		Card card = new Card();
+		card.setTotalGeneral(cardDto.getTotalGeneral());
         entityManager.persist(card);
         cardDto.getCardItems().stream().forEach(cardItemDto -> {
         	Product product = productService.getProductByCodeProduit(cardItemDto.getCodeProduit());
@@ -53,6 +54,7 @@ public class OutMemoryCardRepository implements CardRepository {
         	cardItem.setProduct(product);
         	cardItem.setCard(card);
         	cardItem.setQuantite(cardItemDto.getQuantite());
+        	cardItem.setPrixTotal(cardItemDto.getPrixTotal());
         	entityManager.persist(cardItem);  // here is update, but i still don't know how to do it
         });
 	}
@@ -62,21 +64,19 @@ public class OutMemoryCardRepository implements CardRepository {
 	 */
 	@Override
 	public Card read(Long codeCard) {
-		// TODO Auto-generated method stub
-		List<CardItem> cardItems;
+		// TODO Auto-generated method stub 
+		//List<CardItem> cardItems;
 		Card card = entityManager.find(Card.class, codeCard);
 		if (card == null) {
-			System.out.println("Card not found");
 			throw new RuntimeException("Card not found");
 		}
-		else {
-			System.out.println("Card found");
-			Query req = entityManager.createQuery("select ci from CardItem ci where ci.card.codeCard = :x");
-			req.setParameter("x", codeCard);
-			cardItems = new ArrayList<>();
-			cardItems = req.getResultList();
-			card.setCardItems(cardItems);
-		}
+		//else {
+			//Query req = entityManager.createQuery("select ci from CardItem ci where ci.card.codeCard = :x");
+			//req.setParameter("x", codeCard);
+			//cardItems = new ArrayList<>();
+			//cardItems = req.getResultList();
+			//card.setCardItems(cardItems);
+		//}
 		return card;
 	}
 
@@ -87,14 +87,21 @@ public class OutMemoryCardRepository implements CardRepository {
 	public void update(Long codeCard, CardDto cardDto) {
 		// TODO Auto-generated method stub
 		Card card = entityManager.find(Card.class, codeCard);
+		
 		List<CardItemDto> cardItemsDto = cardDto.getCardItems();
 		for(CardItemDto cardItemDto :cardItemsDto) {
 			Product product = productService.getProductByCodeProduit(cardItemDto.getCodeProduit());
-			CardItem cardItem = new CardItem(cardItemDto.getCodeCardItemDto());
-			cardItem.setQuantite(cardItemDto.getQuantite());
-			cardItem.setCard(card);
-			cardItem.setProduct(product);
-			entityManager.merge(cardItem); // here is update, but i still don't know how to do it
+			Query req = entityManager.createQuery("select ci from CardItem ci where ci.codeCardItem = :y and ci.card.codeCard = :x");
+			req.setParameter("y", cardItemDto.getCodeCardItemDto());
+			req.setParameter("x", codeCard);
+			List<CardItem> cardItems = req.getResultList();
+			if (cardItems != null) {
+				CardItem cardItem = cardItems.get(0);
+				cardItem.setQuantite(cardItemDto.getQuantite());
+				cardItem.setCard(card);
+				cardItem.setProduct(product);
+				entityManager.merge(cardItem);
+			}		
 		}
 	}
 
