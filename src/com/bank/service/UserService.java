@@ -23,13 +23,9 @@ public interface UserService {
 	public Employe addEmploye(Employe employe, Long codeSup);
 	public Groupe addGroupe(Groupe groupe);
 	public void addEmployeToGroupe(Long codeEmploye, Long codeGroupe);
-	public Compte addCompte(Compte compte, Long codeClient, Long codeEmploye);
-	public Operation addOperation(Operation operation, String codeCompte, Long codeEmploye);
-	public void versement(String codeCompte, double montant, Long codeEmploye);
-	public void retrait(String codeCompte, double montant, Long codeEmploye);
-	public void virement(String codeCompte1, String codeCompte2, double montant, Long codeEmploye);
-	public Compte consulterCompte(String codeCompte);
-	public List<Operation> consulterOperations(String codeCompte);
 	public Client consulterClient(Long codeClient);
 	public List<Client> consulterClients(String motCle);
+	public List<Employe> getEmployes();
+	public List<Groupe> getGroupes();
+	public List<Employe> getEmployesByGroupe(Long codeGroupe);
 }

@@ -55,7 +55,7 @@ public class OutMemoryCardRepository implements CardRepository {
         	cardItem.setCard(card);
         	cardItem.setQuantite(cardItemDto.getQuantite());
         	cardItem.setPrixTotal(cardItemDto.getPrixTotal());
-        	entityManager.persist(cardItem);  // here is update, but i still don't know how to do it
+        	entityManager.persist(cardItem); 
         });
 	}
 
@@ -132,9 +132,8 @@ public class OutMemoryCardRepository implements CardRepository {
 		Product product = productService.getProductByCodeProduit(codeProduit);
 		
 		card = read(codeCard);
-		if(card ==null) {
+		if(card == null) {
 			CardItemDto newCardItemDto = new CardItemDto();
-			newCardItemDto.setCodeCardItemDto(codeCard+codeProduit);
 			newCardItemDto.setCodeCardItemDto(codeProduit);
 			newCardItemDto.setQuantite(1);
 			CardDto newCardDto = new CardDto(codeCard);
@@ -143,7 +142,7 @@ public class OutMemoryCardRepository implements CardRepository {
 			return;
 		}
 		if (card.getItemByCodeProduit(codeProduit) == null) {
-			CardItem cardItem = new CardItem(codeCard+codeProduit);
+			CardItem cardItem = new CardItem();
 			cardItem.setQuantite(1);
 			cardItem.setProduct(product);
         	cardItem.setCard(card);
@@ -151,7 +150,7 @@ public class OutMemoryCardRepository implements CardRepository {
 		}
 		else {
 			CardItem existingItem = card.getItemByCodeProduit(codeProduit);
-			existingItem.setProduct(product);
+			//existingItem.setProduct(product);
 			existingItem.setCard(card);
 			existingItem.setQuantite(existingItem.getQuantite() + 1);
 			entityManager.merge(existingItem);

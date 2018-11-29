@@ -70,69 +70,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.bank.service.UserService#addCompte(com.bank.domain.Compte, java.lang.Long, java.lang.Long)
-	 */
-	@Override
-	public Compte addCompte(Compte compte, Long codeClient, Long codeEmploye) {
-		// TODO Auto-generated method stub
-		return userRepository.addCompte(compte, codeClient, codeEmploye);
-	}
-
-	/* (non-Javadoc)
-	 * @see com.bank.service.UserService#addOperation(com.bank.domain.Operation, java.lang.String, java.lang.Long)
-	 */
-	@Override
-	public Operation addOperation(Operation operation, String codeCompte, Long codeEmploye) {
-		// TODO Auto-generated method stub
-		return userRepository.addOperation(operation, codeCompte, codeEmploye);
-	}
-
-	/* (non-Javadoc)
-	 * @see com.bank.service.UserService#versement(java.lang.String, double, java.lang.Long)
-	 */
-	@Override
-	public void versement(String codeCompte, double montant, Long codeEmploye) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/* (non-Javadoc)
-	 * @see com.bank.service.UserService#retrait(java.lang.String, double, java.lang.Long)
-	 */
-	@Override
-	public void retrait(String codeCompte, double montant, Long codeEmploye) {
-		// TODO Auto-generated method stub
-		userRepository.retrait(codeCompte, montant, codeEmploye);
-	}
-
-	/* (non-Javadoc)
-	 * @see com.bank.service.UserService#virement(java.lang.String, java.lang.String, double, java.lang.Long)
-	 */
-	@Override
-	public void virement(String codeCompte1, String codeCompte2, double montant, Long codeEmploye) {
-		// TODO Auto-generated method stub
-		userRepository.virement(codeCompte1, codeCompte2, montant, codeEmploye);
-	}
-
-	/* (non-Javadoc)
-	 * @see com.bank.service.UserService#consulterCompte(java.lang.String)
-	 */
-	@Override
-	public Compte consulterCompte(String codeCompte) {
-		// TODO Auto-generated method stub
-		return userRepository.consulterCompte(codeCompte);
-	}
-
-	/* (non-Javadoc)
-	 * @see com.bank.service.UserService#consulterOperations(java.lang.String)
-	 */
-	@Override
-	public List<Operation> consulterOperations(String codeCompte) {
-		// TODO Auto-generated method stub
-		return userRepository.consulterOperations(codeCompte);
-	}
-
-	/* (non-Javadoc)
 	 * @see com.bank.service.UserService#consulterClient(java.lang.Long)
 	 */
 	@Override
@@ -150,4 +87,20 @@ public class UserServiceImpl implements UserService {
 		return userRepository.consulterClients(motCle);
 	}
 
+	@Override
+	public List<Employe> getEmployes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public List<Groupe> getGroupes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public List<Employe> getEmployesByGroupe(Long codeGroupe) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

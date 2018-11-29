@@ -83,85 +83,6 @@ public class OutMemoryUserRepository implements UserRepository {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.bank.domain.repository.UserRepository#addCompte(com.bank.domain.Compte, java.lang.Long, java.lang.Long)
-	 */
-	@Override
-	public Compte addCompte(Compte compte, Long codeClient, Long codeEmploye) {
-		// TODO Auto-generated method stub
-		Client client = entityManager.find(Client.class, codeClient);
-		Employe employe = entityManager.find(Employe.class, codeEmploye);
-		compte.setClient(client);
-		compte.setEmploye(employe);
-		entityManager.persist(compte);
-		return compte;
-	}
-
-	/* (non-Javadoc)
-	 * @see com.bank.domain.repository.UserRepository#addOperation(com.bank.domain.Operation, java.lang.String, java.lang.Long)
-	 */
-	@Override
-	public Operation addOperation(Operation operation, String codeCompte, Long codeEmploye) {
-		// TODO Auto-generated method stub
-		Compte compte = consulterCompte(codeCompte);
-		Employe employe = entityManager.find(Employe.class, codeEmploye);
-		operation.setCompte(compte);
-		operation.setEmploye(employe);
-		entityManager.persist(operation);
-		return operation;
-	}
-
-	/* (non-Javadoc)
-	 * @see com.bank.domain.repository.UserRepository#versement(java.lang.String, double, java.lang.Long)
-	 */
-	@Override
-	public void versement(String codeCompte, double montant, Long codeEmploye) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/* (non-Javadoc)
-	 * @see com.bank.domain.repository.UserRepository#retrait(java.lang.String, double, java.lang.Long)
-	 */
-	@Override
-	public void retrait(String codeCompte, double montant, Long codeEmploye) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/* (non-Javadoc)
-	 * @see com.bank.domain.repository.UserRepository#virement(java.lang.String, java.lang.String, double, java.lang.Long)
-	 */
-	@Override
-	public void virement(String codeCompte1, String codeCompte2, double montant, Long codeEmploye) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/* (non-Javadoc)
-	 * @see com.bank.domain.repository.UserRepository#consulterCompte(java.lang.String)
-	 */
-	@Override
-	public Compte consulterCompte(String codeCompte) {
-		// TODO Auto-generated method stub
-		Compte compte = entityManager.find(Compte.class, codeCompte);
-		if (compte == null) {
-			throw new RuntimeException("Compte Introuvable");
-		}
-		return compte;
-	}
-
-	/* (non-Javadoc)
-	 * @see com.bank.domain.repository.UserRepository#consulterOperations(java.lang.String)
-	 */
-	@Override
-	public List<Operation> consulterOperations(String codeCompte) {
-		// TODO Auto-generated method stub
-		Query req = entityManager.createQuery("select o from Operation o where o.compte.codeCompte = :x");
-		req.setParameter("x", codeCompte);
-		return req.getResultList();
-	}
-
-	/* (non-Javadoc)
 	 * @see com.bank.domain.repository.UserRepository#consulterClient(java.lang.Long)
 	 */
 	@Override
@@ -179,9 +100,29 @@ public class OutMemoryUserRepository implements UserRepository {
 	 */
 	@Override
 	public List<Client> consulterClients(String motCle) {
-		Query req = entityManager.createQuery("select C from Client c where c.nomClient like: x");
+		Query req = entityManager.createQuery("select c from Client c where c.nomClient like: x");
 		req.setParameter("x", "%" + motCle + "%");
 		return req.getResultList();
 	}
-
+	
+	@Override
+	public List<Employe> getEmployes() {
+		// TODO Auto-generated method stub
+		Query req = entityManager.createQuery("select e from Employe e");
+		return req.getResultList();
+	}
+	
+	@Override
+	public List<Groupe> getGroupes() {
+		// TODO Auto-generated method stub
+		Query req = entityManager.createQuery("select gr from Groupe gr");
+		return req.getResultList();
+	}
+	
+	public List<Employe> getEmployesByGroupe(Long codeGroupe) {
+		// TODO Auto-generated method stub
+		Query req = entityManager.createQuery("select e Employe e where e.groupes.codeGroupe =: x");
+		req.setParameter("x", codeGroupe);
+		return req.getResultList();
+	}
 }
