@@ -86,8 +86,7 @@ public class OutMemoryCardRepository implements CardRepository {
 	@Override
 	public void update(Long codeCard, CardDto cardDto) {
 		// TODO Auto-generated method stub
-		Card card = entityManager.find(Card.class, codeCard);
-		
+		Card card = entityManager.find(Card.class, codeCard);		
 		List<CardItemDto> cardItemsDto = cardDto.getCardItems();
 		for(CardItemDto cardItemDto :cardItemsDto) {
 			Product product = productService.getProductByCodeProduit(cardItemDto.getCodeProduit());
@@ -111,8 +110,14 @@ public class OutMemoryCardRepository implements CardRepository {
 	@Override
 	public void delete(Long id) {
 		// TODO Auto-generated method stub
-		CardItem cardItem = entityManager.find(CardItem.class, id);
-		entityManager.remove(cardItem);
+		Query req = entityManager.createQuery("select ci from CardItem ci where ci.card.codeCard = :x");
+		req.setParameter("x", id);
+		List<CardItem> cardItems = req.getResultList();
+		if (cardItems != null) {
+			for (CardItem cardItem : cardItems) {
+				entityManager.remove(cardItem);
+			}	
+		}	
 		Card card = entityManager.find(Card.class, id);
 		entityManager.remove(card);
 	}
