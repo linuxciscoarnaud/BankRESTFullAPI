@@ -30,7 +30,7 @@ public class AccountServiceImpl implements AccountService {
 	 * @see com.bank.service.AccountService#addCompte(com.bank.domain.Compte, java.lang.Long, java.lang.Long)
 	 */
 	@Override
-	public Compte addCompte(Compte compte, Long codeClient, Long codeEmploye) {
+	public Compte addCompte(Compte compte, String codeClient, String codeEmploye) {
 		// TODO Auto-generated method stub
 		return accountRepository.addCompte(compte, codeClient, codeEmploye);
 	}
@@ -39,7 +39,7 @@ public class AccountServiceImpl implements AccountService {
 	 * @see com.bank.service.AccountService#addOperation(com.bank.domain.Operation, java.lang.String, java.lang.Long)
 	 */
 	@Override
-	public Operation addOperation(Operation operation, String codeCompte, Long codeEmploye) {
+	public Operation addOperation(Operation operation, String codeCompte, String codeEmploye) {
 		// TODO Auto-generated method stub
 		return accountRepository.addOperation(operation, codeCompte, codeEmploye);
 	}
@@ -48,7 +48,7 @@ public class AccountServiceImpl implements AccountService {
 	 * @see com.bank.service.AccountService#versement(java.lang.String, double, java.lang.Long)
 	 */
 	@Override
-	public void versement(String codeCompte, double montant, Long codeEmploye) {
+	public void versement(String codeCompte, double montant, String codeEmploye) {
 		// TODO Auto-generated method stub
 		accountRepository.versement(codeCompte, montant, codeEmploye);
 	}
@@ -57,7 +57,7 @@ public class AccountServiceImpl implements AccountService {
 	 * @see com.bank.service.AccountService#retrait(java.lang.String, double, java.lang.Long)
 	 */
 	@Override
-	public void retrait(String codeCompte, double montant, Long codeEmploye) {
+	public void retrait(String codeCompte, double montant, String codeEmploye) {
 		// TODO Auto-generated method stub
 		accountRepository.retrait(codeCompte, montant, codeEmploye);
 	}
@@ -66,7 +66,7 @@ public class AccountServiceImpl implements AccountService {
 	 * @see com.bank.service.AccountService#virement(java.lang.String, java.lang.String, double, java.lang.Long)
 	 */
 	@Override
-	public void virement(String codeCompte1, String codeCompte2, double montant, Long codeEmploye) {
+	public void virement(String codeCompte1, String codeCompte2, double montant, String codeEmploye) {
 		// TODO Auto-generated method stub
 		accountRepository.virement(codeCompte1, codeCompte2, montant, codeEmploye);
 	}
@@ -90,13 +90,13 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public List<Compte> getComptesDuClient(Long codeClient) {
+	public List<Compte> getComptesDuClient(String codeClient) {
 		// TODO Auto-generated method stub
 		return accountRepository.getComptesDuClient(codeClient);
 	}
 	
 	@Override
-	public List<Compte> getComptesParEmploye(Long codeEmploye) {
+	public List<Compte> getComptesParEmploye(String codeEmploye) {
 		// TODO Auto-generated method stub
 		return accountRepository.getComptesParEmploye(codeEmploye);
 	}

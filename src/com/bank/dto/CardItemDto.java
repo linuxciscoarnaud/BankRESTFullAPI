@@ -16,21 +16,21 @@ public class CardItemDto implements Serializable {
 
 	private static final long serialVersionUID = -3551573319376880896L;
 	
-	private Long codeCardItemDto;
-	private Long codeProduit;
+	private String codeCardItemDto;
+	private String codeProduit;
 	private int quantite;
 	private BigDecimal prixTotal;
 	
-	public Long getCodeCardItemDto() {
+	public String getCodeCardItemDto() {
 		return codeCardItemDto;
 	}
-	public void setCodeCardItemDto(Long codeCardItemDto) {
+	public void setCodeCardItemDto(String codeCardItemDto) {
 		this.codeCardItemDto = codeCardItemDto;
 	}
-	public Long getCodeProduit() {
+	public String getCodeProduit() {
 		return codeProduit;
 	}
-	public void setCodeProduit(Long codeProduit) {
+	public void setCodeProduit(String codeProduit) {
 		this.codeProduit = codeProduit;
 	}
 	public int getQuantite() {

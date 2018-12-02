@@ -3,6 +3,8 @@
  */
 package com.bank.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +27,14 @@ public class ProductServiceImpl implements ProductService {
 	 * @see com.bank.service.ProductService#getProductByCodeProduit(java.lang.Long)
 	 */
 	@Override
-	public Product getProductByCodeProduit(Long codeProduit) {
+	public Product getProductByCodeProduit(String codeProduit) {
 		// TODO Auto-generated method stub
 		return productRepository.getProductByCodeProduit(codeProduit);
+	}
+	
+	@Override
+	public List<Product> getAllProducts() {
+		// TODO Auto-generated method stub
+		return productRepository.getAllProducts();
 	}
 }

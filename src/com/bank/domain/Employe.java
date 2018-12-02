@@ -15,6 +15,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import com.bank.tools.IdGenerator;
+
 /**
  * @author Arnaud
  *
@@ -24,8 +28,9 @@ import javax.persistence.ManyToOne;
 public class Employe implements Serializable {
 
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	private Long codeEmploye;
+	@GeneratedValue(generator = IdGenerator.generatorName)
+	@GenericGenerator(name = IdGenerator.generatorName, strategy = "com.bank.tools.IdGenerator")
+	private String codeEmploye;
 	private String nomEmploye;
 	@ManyToOne
 	@JoinColumn (name = "CODE_EMPLOYE_SUP")
@@ -48,10 +53,10 @@ public class Employe implements Serializable {
 
 
 
-	public Long getCodeEmploye() {
+	public String getCodeEmploye() {
 		return codeEmploye;
 	}
-	public void setCodeEmploye(Long codeEmploye) {
+	public void setCodeEmploye(String codeEmploye) {
 		this.codeEmploye = codeEmploye;
 	}
 	public String getNomEmploye() {

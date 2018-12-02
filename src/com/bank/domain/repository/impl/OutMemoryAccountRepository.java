@@ -34,7 +34,7 @@ public class OutMemoryAccountRepository implements AccountRepository {
 	 * @see com.bank.domain.repository.AccountRepository#addCompte(com.bank.domain.Compte, java.lang.Long, java.lang.Long)
 	 */
 	@Override
-	public Compte addCompte(Compte compte, Long codeClient, Long codeEmploye) {
+	public Compte addCompte(Compte compte, String codeClient, String codeEmploye) {
 		// TODO Auto-generated method stub
 		Client client = entityManager.find(Client.class, codeClient);
 		Employe employe = entityManager.find(Employe.class, codeEmploye);
@@ -48,7 +48,7 @@ public class OutMemoryAccountRepository implements AccountRepository {
 	 * @see com.bank.domain.repository.AccountRepository#addOperation(com.bank.domain.Operation, java.lang.String, java.lang.Long)
 	 */
 	@Override
-	public Operation addOperation(Operation operation, String codeCompte, Long codeEmploye) {
+	public Operation addOperation(Operation operation, String codeCompte, String codeEmploye) {
 		// TODO Auto-generated method stub
 		Compte compte = consulterCompte(codeCompte);
 		Employe employe = entityManager.find(Employe.class, codeEmploye);
@@ -62,7 +62,7 @@ public class OutMemoryAccountRepository implements AccountRepository {
 	 * @see com.bank.domain.repository.AccountRepository#versement(java.lang.String, double, java.lang.Long)
 	 */
 	@Override
-	public void versement(String codeCompte, double montant, Long codeEmploye) {
+	public void versement(String codeCompte, double montant, String codeEmploye) {
 		// TODO Auto-generated method stub
 
 	}
@@ -71,7 +71,7 @@ public class OutMemoryAccountRepository implements AccountRepository {
 	 * @see com.bank.domain.repository.AccountRepository#retrait(java.lang.String, double, java.lang.Long)
 	 */
 	@Override
-	public void retrait(String codeCompte, double montant, Long codeEmploye) {
+	public void retrait(String codeCompte, double montant, String codeEmploye) {
 		// TODO Auto-generated method stub
 
 	}
@@ -80,7 +80,7 @@ public class OutMemoryAccountRepository implements AccountRepository {
 	 * @see com.bank.domain.repository.AccountRepository#virement(java.lang.String, java.lang.String, double, java.lang.Long)
 	 */
 	@Override
-	public void virement(String codeCompte1, String codeCompte2, double montant, Long codeEmploye) {
+	public void virement(String codeCompte1, String codeCompte2, double montant, String codeEmploye) {
 		// TODO Auto-generated method stub
 
 	}
@@ -109,14 +109,14 @@ public class OutMemoryAccountRepository implements AccountRepository {
 		return req.getResultList();
 	}
 	
-	public List<Compte> getComptesDuClient(Long codeClient) {
+	public List<Compte> getComptesDuClient(String codeClient) {
 		// TODO Auto-generated method stub
 		Query req = entityManager.createQuery("select cm from Compte cm where cm.client.codeClient = :x");
 		req.setParameter("x", codeClient);
 		return req.getResultList();
 	}
 	
-	public List<Compte> getComptesParEmploye(Long codeEmploye) {
+	public List<Compte> getComptesParEmploye(String codeEmploye) {
 		// TODO Auto-generated method stub
 		Query req = entityManager.createQuery("select cm from Compte cm where cm.employe.codeEmploye = :x");
 		req.setParameter("x", codeEmploye);

@@ -3,8 +3,11 @@
  */
 package com.bank.domain.repository.impl;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
@@ -27,13 +30,20 @@ public class OutMemoryProductRepository implements ProductRepository {
 	 * @see com.bank.domain.repository.ProductRepository#getProductByCodeProduit(java.lang.Long)
 	 */
 	@Override
-	public Product getProductByCodeProduit(Long codeProduit) {
+	public Product getProductByCodeProduit(String codeProduit) {
 		// TODO Auto-generated method stub
 		Product product = entityManager.find(Product.class, codeProduit);
 		if (product == null) {
 			throw new RuntimeException("Product not found");
 		}
 		return product;
+	}
+	
+	@Override
+	public List<Product> getAllProducts() {
+		// TODO Auto-generated method stub
+		Query req = entityManager.createQuery("from Product pr");
+		return req.getResultList();
 	}
 
 }

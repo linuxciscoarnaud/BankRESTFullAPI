@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
 	 * @see com.bank.service.UserService#addEmploye(com.bank.domain.Employe, java.lang.Long)
 	 */
 	@Override
-	public Employe addEmploye(Employe employe, Long codeSup) {
+	public Employe addEmploye(Employe employe, String codeSup) {
 		// TODO Auto-generated method stub
 		return userRepository.addEmploye(employe, codeSup);
 	}
@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
 	 * @see com.bank.service.UserService#addEmployeToGroupe(java.lang.Long, java.lang.Long)
 	 */
 	@Override
-	public void addEmployeToGroupe(Long codeEmploye, Long codeGroupe) {
+	public void addEmployeToGroupe(String codeEmploye, String codeGroupe) {
 		// TODO Auto-generated method stub
 		userRepository.addEmployeToGroupe(codeEmploye, codeGroupe);
 	}
@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService {
 	 * @see com.bank.service.UserService#consulterClient(java.lang.Long)
 	 */
 	@Override
-	public Client consulterClient(Long codeClient) {
+	public Client consulterClient(String codeClient) {
 		// TODO Auto-generated method stub
 		return userRepository.consulterClient(codeClient);
 	}
@@ -99,7 +99,7 @@ public class UserServiceImpl implements UserService {
 		return null;
 	}
 	
-	public List<Employe> getEmployesByGroupe(Long codeGroupe) {
+	public List<Employe> getEmployesByGroupe(String codeGroupe) {
 		// TODO Auto-generated method stub
 		return null;
 	}

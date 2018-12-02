@@ -14,6 +14,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import com.bank.tools.IdGenerator;
+
 /**
  * @author Arnaud
  *
@@ -24,8 +28,9 @@ import javax.persistence.Table;
 public class Client implements Serializable {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codeClient;
+	@GeneratedValue(generator = IdGenerator.generatorName)
+	@GenericGenerator(name = IdGenerator.generatorName, strategy = "com.bank.tools.IdGenerator")
+	private String codeClient;
 	private String nomClient;
 	private String adresseClient;
 	@OneToMany (mappedBy = "client", fetch = FetchType.LAZY)
@@ -42,10 +47,10 @@ public class Client implements Serializable {
 		this.adresseClient = adresseClient;
 	}
 	
-	public Long getCodeClient() {
+	public String getCodeClient() {
 		return codeClient;
 	}
-	public void setCodeClient(Long codeClient) {
+	public void setCodeClient(String codeClient) {
 		this.codeClient = codeClient;
 	}
 	public String getNomClient() {

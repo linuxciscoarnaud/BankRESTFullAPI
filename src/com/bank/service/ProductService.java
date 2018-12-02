@@ -3,7 +3,7 @@
  */
 package com.bank.service;
 
-import org.springframework.stereotype.Service;
+import java.util.List;
 
 import com.bank.domain.Product;
 
@@ -14,5 +14,6 @@ import com.bank.domain.Product;
 
 public interface ProductService {
 
-	Product getProductByCodeProduit(Long codeProduit);
+	Product getProductByCodeProduit(String codeProduit);
+	List<Product> getAllProducts();
 }

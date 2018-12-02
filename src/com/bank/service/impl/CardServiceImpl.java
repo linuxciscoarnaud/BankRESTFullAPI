@@ -35,7 +35,7 @@ public class CardServiceImpl implements CardService {
 	 * @see com.bank.service.CardService#read(java.lang.Long)
 	 */
 	@Override
-	public Card read(Long codeCard) {
+	public Card read(String codeCard) {
 		// TODO Auto-generated method stub
 		return cardRepository.read(codeCard);
 	}
@@ -44,7 +44,7 @@ public class CardServiceImpl implements CardService {
 	 * @see com.bank.service.CardService#update(java.lang.Long, com.bank.dto.CardDto)
 	 */
 	@Override
-	public void update(Long id, CardDto cardDto) {
+	public void update(String id, CardDto cardDto) {
 		// TODO Auto-generated method stub
 		cardRepository.update(id, cardDto);
 	}
@@ -53,7 +53,7 @@ public class CardServiceImpl implements CardService {
 	 * @see com.bank.service.CardService#delete(java.lang.Long)
 	 */
 	@Override
-	public void delete(Long id) {
+	public void delete(String id) {
 		// TODO Auto-generated method stub
 		cardRepository.delete(id);
 	}
@@ -62,7 +62,7 @@ public class CardServiceImpl implements CardService {
 	 * @see com.bank.service.CardService#addItem(java.lang.Long, java.lang.Long)
 	 */
 	@Override
-	public void addItem(Long codeCard, Long codeProduit) {
+	public void addItem(String codeCard, String codeProduit) {
 		// TODO Auto-generated method stub
 		cardRepository.addItem(codeCard, codeProduit);
 	}
@@ -71,7 +71,7 @@ public class CardServiceImpl implements CardService {
 	 * @see com.bank.service.CardService#removeItem(java.lang.Long, java.lang.Long)
 	 */
 	@Override
-	public void removeItem(Long codeCard, Long codeProduit) {
+	public void removeItem(String codeCard, String codeProduit) {
 		// TODO Auto-generated method stub
 		cardRepository.removeItem(codeCard, codeProduit);
 	}

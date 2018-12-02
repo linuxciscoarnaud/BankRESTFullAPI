@@ -50,7 +50,7 @@ public class OutMemoryUserRepository implements UserRepository {
 	 * @see com.bank.domain.repository.UserRepository#addEmploye(com.bank.domain.Employe, java.lang.Long)
 	 */
 	@Override
-	public Employe addEmploye(Employe employe, Long codeSup) {
+	public Employe addEmploye(Employe employe, String codeSup) {
 		// TODO Auto-generated method stub
 		if (codeSup != null) {
 			Employe employeSup = entityManager.find(Employe.class, codeSup);
@@ -74,7 +74,7 @@ public class OutMemoryUserRepository implements UserRepository {
 	 * @see com.bank.domain.repository.UserRepository#addEmployeToGroupe(java.lang.Long, java.lang.Long)
 	 */
 	@Override
-	public void addEmployeToGroupe(Long codeEmploye, Long codeGroupe) {
+	public void addEmployeToGroupe(String codeEmploye, String codeGroupe) {
 		// TODO Auto-generated method stub
 		Employe employe = entityManager.find(Employe.class, codeEmploye);
 		Groupe groupe = entityManager.find(Groupe.class, codeGroupe);
@@ -86,7 +86,7 @@ public class OutMemoryUserRepository implements UserRepository {
 	 * @see com.bank.domain.repository.UserRepository#consulterClient(java.lang.Long)
 	 */
 	@Override
-	public Client consulterClient(Long codeClient) {
+	public Client consulterClient(String codeClient) {
 		// TODO Auto-generated method stub
 		Client client = entityManager.find(Client.class, codeClient);
 		if (client == null) {
@@ -119,7 +119,7 @@ public class OutMemoryUserRepository implements UserRepository {
 		return req.getResultList();
 	}
 	
-	public List<Employe> getEmployesByGroupe(Long codeGroupe) {
+	public List<Employe> getEmployesByGroupe(String codeGroupe) {
 		// TODO Auto-generated method stub
 		Query req = entityManager.createQuery("select e Employe e where e.groupes.codeGroupe =: x");
 		req.setParameter("x", codeGroupe);

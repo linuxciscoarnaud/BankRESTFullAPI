@@ -7,12 +7,14 @@ import java.math.BigDecimal;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import com.bank.tools.IdGenerator;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 /**
@@ -26,8 +28,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 public class CardItem {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codeCardItem;
+	@GeneratedValue(generator = IdGenerator.generatorName)
+	@GenericGenerator(name = IdGenerator.generatorName, strategy = "com.bank.tools.IdGenerator")
+	private String codeCardItem;
 	private int quantite;
 	private BigDecimal prixTotal;
 	@JsonBackReference
@@ -42,16 +45,16 @@ public class CardItem {
 		
 	}
 	
-	public CardItem(Long codeCardItem) {
+	public CardItem(String codeCardItem) {
 		super();
 		this.codeCardItem = codeCardItem;
 	}
 
-	public Long getCodeCardItem() {
+	public String getCodeCardItem() {
 		return codeCardItem;
 	}
 
-	public void setCodeCardItem(Long codeCardItem) {
+	public void setCodeCardItem(String codeCardItem) {
 		this.codeCardItem = codeCardItem;
 	}
 

@@ -16,6 +16,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import com.bank.tools.IdGenerator;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
@@ -28,8 +31,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class Card {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codeCard;
+	private String codeCard;
 	private BigDecimal totalGeneral;
 	@JsonManagedReference
 	@OneToMany (mappedBy = "card", fetch = FetchType.EAGER)
@@ -39,15 +41,15 @@ public class Card {
 		
 	}
 	
-	public Card(Long codeCard) {
+	public Card(String codeCard) {
 		this.codeCard = codeCard;
 	}
 
-	public Long getCodeCard() {
+	public String getCodeCard() {
 		return codeCard;
 	}
 
-	public void setCodeCard(Long codeCard) {
+	public void setCodeCard(String codeCard) {
 		this.codeCard = codeCard;
 	}
 
@@ -67,7 +69,7 @@ public class Card {
 		this.cardItems = cardItems;
 	}
 	
-	public CardItem getItemByCodeProduit(Long codeProduit) {
+	public CardItem getItemByCodeProduit(String codeProduit) {
 		return cardItems.stream().filter(cardItem -> cardItem.getProduct().getCodeProduit()
 		         .equals(codeProduit))
 		         .findAny()

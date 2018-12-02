@@ -12,6 +12,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import com.bank.tools.IdGenerator;
+
 /**
  * @author Arnaud
  *
@@ -21,8 +25,9 @@ import javax.persistence.ManyToMany;
 public class Groupe implements Serializable {
 
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	private Long codeGroupe;
+	@GeneratedValue(generator = IdGenerator.generatorName)
+	@GenericGenerator(name = IdGenerator.generatorName, strategy = "com.bank.tools.IdGenerator")
+	private String codeGroupe;
 	private String nomGroupe;
 	@ManyToMany (mappedBy = "groupes")
 	private Collection<Employe> employes;
@@ -39,10 +44,10 @@ public class Groupe implements Serializable {
 
 
 
-	public Long getCodeGroupe() {
+	public String getCodeGroupe() {
 		return codeGroupe;
 	}
-	public void setCodeGroupe(Long codeGroupe) {
+	public void setCodeGroupe(String codeGroupe) {
 		this.codeGroupe = codeGroupe;
 	}
 	public String getNomGroupe() {

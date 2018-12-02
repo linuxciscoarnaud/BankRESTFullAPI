@@ -3,6 +3,8 @@
  */
 package com.bank.domain.repository;
 
+import java.util.List;
+
 import com.bank.domain.Product;
 
 /**
@@ -13,5 +15,6 @@ import com.bank.domain.Product;
 
 public interface ProductRepository {
 
-	Product getProductByCodeProduit(Long codeProduit);
+	Product getProductByCodeProduit(String codeProduit);
+	List<Product> getAllProducts();
 }

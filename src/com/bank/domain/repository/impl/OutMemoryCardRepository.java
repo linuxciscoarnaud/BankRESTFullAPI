@@ -3,7 +3,6 @@
  */
 package com.bank.domain.repository.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -16,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bank.domain.Card;
 import com.bank.domain.CardItem;
-import com.bank.domain.Operation;
 import com.bank.domain.Product;
 import com.bank.domain.repository.CardRepository;
 import com.bank.dto.CardDto;
@@ -47,6 +45,7 @@ public class OutMemoryCardRepository implements CardRepository {
 		// TODO Auto-generated method stub
 		Card card = new Card();
 		card.setTotalGeneral(cardDto.getTotalGeneral());
+		card.setCodeCard(cardDto.getCodeCardDto());
         entityManager.persist(card);
         cardDto.getCardItems().stream().forEach(cardItemDto -> {
         	Product product = productService.getProductByCodeProduit(cardItemDto.getCodeProduit());
@@ -63,20 +62,9 @@ public class OutMemoryCardRepository implements CardRepository {
 	 * @see com.bank.domain.repository.CardRepository#read(java.lang.Long)
 	 */
 	@Override
-	public Card read(Long codeCard) {
+	public Card read(String codeCard) {
 		// TODO Auto-generated method stub 
-		//List<CardItem> cardItems;
 		Card card = entityManager.find(Card.class, codeCard);
-		if (card == null) {
-			throw new RuntimeException("Card not found");
-		}
-		//else {
-			//Query req = entityManager.createQuery("select ci from CardItem ci where ci.card.codeCard = :x");
-			//req.setParameter("x", codeCard);
-			//cardItems = new ArrayList<>();
-			//cardItems = req.getResultList();
-			//card.setCardItems(cardItems);
-		//}
 		return card;
 	}
 
@@ -84,7 +72,7 @@ public class OutMemoryCardRepository implements CardRepository {
 	 * @see com.bank.domain.repository.CardRepository#update(java.lang.Long, com.bank.dto.CardDto)
 	 */
 	@Override
-	public void update(Long codeCard, CardDto cardDto) {
+	public void update(String codeCard, CardDto cardDto) {
 		// TODO Auto-generated method stub
 		Card card = entityManager.find(Card.class, codeCard);		
 		List<CardItemDto> cardItemsDto = cardDto.getCardItems();
@@ -108,7 +96,7 @@ public class OutMemoryCardRepository implements CardRepository {
 	 * @see com.bank.domain.repository.CardRepository#delete(java.lang.Long)
 	 */
 	@Override
-	public void delete(Long id) {
+	public void delete(String id) {
 		// TODO Auto-generated method stub
 		Query req = entityManager.createQuery("select ci from CardItem ci where ci.card.codeCard = :x");
 		req.setParameter("x", id);
@@ -126,31 +114,32 @@ public class OutMemoryCardRepository implements CardRepository {
 	 * @see com.bank.domain.repository.CardRepository#addItem(java.lang.Long, java.lang.Long)
 	 */
 	@Override
-	public void addItem(Long codeCard, Long codeProduit) {
+	public void addItem(String codeCard, String codeProduit) {
 		// TODO Auto-generated method stub
+		System.out.println("code cart: " + codeCard);
 		Card card = null;
 		Product product = productService.getProductByCodeProduit(codeProduit);
 		
 		card = read(codeCard);
-		if(card == null) {
+		if(card == null) {     // The cart does not exists yet. So needs to be created.
 			CardItemDto newCardItemDto = new CardItemDto();
-			newCardItemDto.setCodeCardItemDto(codeProduit);
+			newCardItemDto.setCodeProduit(codeProduit);
 			newCardItemDto.setQuantite(1);
 			CardDto newCardDto = new CardDto(codeCard);
 			newCardDto.addCardItem(newCardItemDto);
 			create(newCardDto);
 			return;
 		}
-		if (card.getItemByCodeProduit(codeProduit) == null) {
-			CardItem cardItem = new CardItem();
-			cardItem.setQuantite(1);
+		if (card.getItemByCodeProduit(codeProduit) == null) {  // The cart already exists, but the item we wish to add
+			CardItem cardItem = new CardItem();                // does not yet exists on the cart. So we create a new
+			cardItem.setQuantite(1);                           // cart item and add the item
 			cardItem.setProduct(product);
         	cardItem.setCard(card);
         	entityManager.persist(cardItem);
 		}
-		else {
-			CardItem existingItem = card.getItemByCodeProduit(codeProduit);
-			//existingItem.setProduct(product);
+		else {                                                              // The cart already exists, the item we wish to add also.
+			CardItem existingItem = card.getItemByCodeProduit(codeProduit); // So we  just update the existing cart item with one more
+			existingItem.setProduct(product);                             // same item.
 			existingItem.setCard(card);
 			existingItem.setQuantite(existingItem.getQuantite() + 1);
 			entityManager.merge(existingItem);
@@ -161,7 +150,7 @@ public class OutMemoryCardRepository implements CardRepository {
 	 * @see com.bank.domain.repository.CardRepository#removeItem(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public void removeItem(Long codeCard, Long codeProduit) {
+	public void removeItem(String codeCard, String codeProduit) {
 		// TODO Auto-generated method stub
 		Card card = read(codeCard);
 		CardItem cardItem = card.getItemByCodeProduit(codeProduit);

@@ -11,6 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import com.bank.tools.IdGenerator;
+
 /**
  * @author Arnaud
  *
@@ -21,8 +25,9 @@ import javax.persistence.Table;
 public class Product {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codeProduit;
+	@GeneratedValue(generator = IdGenerator.generatorName)
+	@GenericGenerator(name = IdGenerator.generatorName, strategy = "com.bank.tools.IdGenerator")
+	private String codeProduit;
 	private String nomProduit;
 	private BigDecimal prixUnitaire;
 	
@@ -31,16 +36,16 @@ public class Product {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Product(Long codeProduit, String nomProduit, BigDecimal prixUnitaire) {
+	public Product(String codeProduit, String nomProduit, BigDecimal prixUnitaire) {
 		this.codeProduit = codeProduit;
 		this.nomProduit = nomProduit;
 		this.prixUnitaire = prixUnitaire;
 	}
 	
-	public Long getCodeProduit() {
+	public String getCodeProduit() {
 		return codeProduit;
 	}
-	public void setCodeProduit(Long codeProduit) {
+	public void setCodeProduit(String codeProduit) {
 		this.codeProduit = codeProduit;
 	}
 	public String getNomProduit() {

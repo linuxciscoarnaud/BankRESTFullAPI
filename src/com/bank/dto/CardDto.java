@@ -18,31 +18,32 @@ public class CardDto implements Serializable {
 
 	private static final long serialVersionUID = - 2017182726290898588L;
 	
-	private Long codeCardDto;
+	private String codeCardDto;
 	private BigDecimal totalGeneral;
+	
+	private List<CardItemDto> cardItems;
 	
 	public BigDecimal getTotalGeneral() {
 		return totalGeneral;
 	}
 
-	public void setTotalGeneral(BigDecimal totalGeneral) {
-		this.totalGeneral = totalGeneral;
-	}
-
-	private List<CardItemDto> cardItems;
-	
 	public CardDto() {}
 	
-	public CardDto(Long codeCardDto) {
+	public CardDto(String codeCardDto) {
 		this.codeCardDto = codeCardDto;
 		cardItems = new ArrayList<>();
 	}
+	
+	public void setTotalGeneral(BigDecimal totalGeneral) {
+		this.totalGeneral = totalGeneral;
+	}
+	
 
-	public Long getCodeCardDto() {
+	public String getCodeCardDto() {
 		return codeCardDto;
 	}
 
-	public void setCodeCardDto(Long codeCardDto) {
+	public void setCodeCardDto(String codeCardDto) {
 		this.codeCardDto = codeCardDto;
 	}
 

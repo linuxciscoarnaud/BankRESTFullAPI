@@ -14,9 +14,9 @@ import com.bank.dto.CardDto;
 public interface CardRepository {
 
 	void create(CardDto cardDto);
-	Card read(Long codeCard);
-	void update(Long id, CardDto cardDto);
-	void delete(Long id);
-	void addItem(Long codeCard, Long codeProduit);
-	void removeItem(Long codeCard, Long codeProduit);
+	Card read(String codeCard);
+	void update(String id, CardDto cardDto);
+	void delete(String id);
+	void addItem(String codeCard, String codeProduit);
+	void removeItem(String codeCard, String codeProduit);
 }

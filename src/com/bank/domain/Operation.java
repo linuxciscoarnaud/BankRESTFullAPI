@@ -15,6 +15,10 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import com.bank.tools.IdGenerator;
+
 /**
  * @author Arnaud
  *
@@ -25,8 +29,9 @@ import javax.persistence.ManyToOne;
 public class Operation implements Serializable {
 
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	private Long numeroOperation;
+	@GeneratedValue(generator = IdGenerator.generatorName)
+	@GenericGenerator(name = IdGenerator.generatorName, strategy = "com.bank.tools.IdGenerator")
+	private String numeroOperation;
 	private Date dateOperation;
 	private double montant;
 	@ManyToOne
@@ -49,10 +54,10 @@ public class Operation implements Serializable {
 
 
 
-	public Long getNumeroOperation() {
+	public String getNumeroOperation() {
 		return numeroOperation;
 	}
-	public void setNumeroOperation(Long numeroOperation) {
+	public void setNumeroOperation(String numeroOperation) {
 		this.numeroOperation = numeroOperation;
 	}
 	public Date getDateOperation() {

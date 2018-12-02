@@ -20,12 +20,12 @@ public interface UserRepository {
 
 	public Client addClient(Client client);
 	public List<Client> consulterTousLesClients();
-	public Employe addEmploye(Employe employe, Long codeSup);
+	public Employe addEmploye(Employe employe, String codeSup);
 	public Groupe addGroupe(Groupe groupe);
-	public void addEmployeToGroupe(Long codeEmploye, Long codeGroupe);
-	public Client consulterClient(Long codeClient);
+	public void addEmployeToGroupe(String codeEmploye, String codeGroupe);
+	public Client consulterClient(String codeClient);
 	public List<Client> consulterClients(String motCle);
 	public List<Employe> getEmployes();
 	public List<Groupe> getGroupes();
-	public List<Employe> getEmployesByGroupe(Long codeGroupe);
+	public List<Employe> getEmployesByGroupe(String codeGroupe);
 }
