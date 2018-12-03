@@ -44,7 +44,7 @@ public class OutMemoryCardRepository implements CardRepository {
 	public void create(CardDto cardDto) {
 		// TODO Auto-generated method stub
 		Card card = new Card();
-		card.setTotalGeneral(cardDto.getTotalGeneral());
+		//card.setTotalGeneral(cardDto.getTotalGeneral());
 		card.setCodeCard(cardDto.getCodeCardDto());
         entityManager.persist(card);
         cardDto.getCardItems().stream().forEach(cardItemDto -> {
@@ -116,7 +116,6 @@ public class OutMemoryCardRepository implements CardRepository {
 	@Override
 	public void addItem(String codeCard, String codeProduit) {
 		// TODO Auto-generated method stub
-		System.out.println("code cart: " + codeCard);
 		Card card = null;
 		Product product = productService.getProductByCodeProduit(codeProduit);
 		

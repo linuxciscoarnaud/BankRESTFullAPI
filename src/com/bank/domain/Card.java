@@ -54,6 +54,7 @@ public class Card {
 	}
 
 	public BigDecimal getTotalGeneral() {
+		updateTotalGeneral();
 		return totalGeneral;
 	}
 

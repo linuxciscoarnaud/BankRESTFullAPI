@@ -12,11 +12,11 @@
 <h1>Card</h1>
 <p>All the selected products in your card</p>
 
-<section class="container" ng-app="cartApp">
-   <div ng-controller="cartCtrl" ng-init="initCartId('${cardId}')">
+<section class="container" ng-app="cardApp">
+   <div ng-controller="cardCtrl" ng-init="initCardId('${cardId}')">
    
    <div>
-       <a class="btn btn-danger pull-left" ng-click="clearCart()"> <span class="glyphicon glyphicon-remove-sign"></span> 
+       <a class="btn btn-danger pull-left" ng-click="clearCard()"> <span class="glyphicon glyphicon-remove-sign"></span> 
            Clear Card
        </a>
        
@@ -34,12 +34,12 @@
            <th>Action a faire</th>
        </tr>
        
-       <tr ng-repeat="item in card.cartItems">
-           <td>{{item.product.codeProduit}}-{{item.product.nomProduit}}</td>
+       <tr ng-repeat="item in card.cardItems">
+           <td>{{item.product.nomProduit}}</td>
            <td>{{item.product.prixUnitaire}}</td>
            <td>{{item.quantite}}</td>
            <td>{{item.prixTotal}}</td>
-           <td><a href="#" class="label label-danger" ng-click="removeFromCart(item.product.codeProduit)"> <span class="glyphicon glyphicon-remove" /></span> Remove</a></td>
+           <td><a href="#" class="label label-danger" ng-click="removeFromCard(item.product.codeProduit)"> <span class="glyphicon glyphicon-remove" /></span> Remove</a></td>
        </tr>
        
        <tr>

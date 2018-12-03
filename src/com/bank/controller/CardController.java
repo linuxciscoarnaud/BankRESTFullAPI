@@ -27,7 +27,7 @@ public class CardController {
 	}
 	
 	@RequestMapping(value = "/{cardId}", method = RequestMethod.GET)
-	public String getCart(@PathVariable(value = "cardId") Long cardId, Model model) {
+	public String getCard(@PathVariable(value = "cardId") String cardId, Model model) {
 		System.out.println("NOW HERE 2");
 		model.addAttribute("cardId",cardId);
 		return "card";

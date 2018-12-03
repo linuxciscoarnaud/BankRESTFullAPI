@@ -67,6 +67,7 @@ public class CardItem {
 	}
 
 	public BigDecimal getPrixTotal() {
+		this.updatePrixTotal();
 		return prixTotal;
 	}
 
@@ -87,6 +88,7 @@ public class CardItem {
 
 	public void setProduct(Product product) {
 		this.product = product;
+		this.updatePrixTotal();
 	}
 	
 	public void updatePrixTotal() {
