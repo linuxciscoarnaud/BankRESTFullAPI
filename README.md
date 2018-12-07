@@ -12,7 +12,7 @@ Tables card and carditem before running the API
 
 ![post3](https://user-images.githubusercontent.com/1300982/49336561-80424780-f63f-11e8-8f77-0023ca9ea1b4.png)
 
-Following screenshots are the results obtained for each request method:
+The following screenshots are the results obtained for each request method:
 
 http://localhost:8080/BankRESTFullAPI/rest/card with POST request method
 
